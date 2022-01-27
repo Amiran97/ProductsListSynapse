@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListComponent } from './components/list/list.component';
 import { DetailsComponent } from './components/details/details.component';
+import { ProductsRoutingModule } from './products-routing.module';
 
 
 
@@ -11,7 +12,8 @@ import { DetailsComponent } from './components/details/details.component';
     DetailsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ProductsRoutingModule
   ]
 })
 export class ProductsModule { }
