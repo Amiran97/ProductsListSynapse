@@ -1,3 +1,40 @@
-<p>
-  login works!
-</p>
+<div class="container center-div">
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <div class="card-body">
+
+          <div class="form-center">
+            <a class="text-lightgrey" [routerLink]="['/account/register']">Don't have an account? Sign Up</a>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <p>Sign in to Synapse Intership</p>
+              <p class="text-lightgrey">Sign in on out platform</p>
+
+              <div class="form-group mt-4">
+                  <input formControlName="username" placeholder="Username" id="username" type="text" class="form-control">
+                  <ng-container *ngIf="username?.touched">
+                      <span *ngIf="username?.errors?.['required']" class="text-danger">Username is required!</span>
+                  </ng-container>
+              </div>
+
+              <div class="form-group mt-4">
+                  <input formControlName="password" placeholder="Password" id="password" type="password" class="form-control">
+                  <ng-container *ngIf="password?.touched">
+                      <span *ngIf="password?.errors?.['required']" class="text-danger">Password is required!</span>
+                  </ng-container>
+              </div>
+
+              <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary mr-2 mt-4">SIGN IN</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <img src="assets/images/synapse-team-big-logo.png" class="img-fluid rounded-start">
+      </div>
+    </div>
+  </div>
+</div>
+
+
