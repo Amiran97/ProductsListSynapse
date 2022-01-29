@@ -15,6 +15,8 @@
                   <input formControlName="username" placeholder="Username" id="username" type="text" class="form-control">
                   <ng-container *ngIf="username?.touched">
                       <span *ngIf="username?.errors?.['required']" class="text-danger">Username is required!</span>
+                      <span *ngIf="username?.errors?.['minlength']" class="text-danger">Minimum 4 characters!</span>
+                      <span *ngIf="username?.errors?.['maxlength']" class="text-danger">Maximum 20 characters!</span>
                   </ng-container>
               </div>
 
@@ -22,6 +24,8 @@
                   <input formControlName="password" placeholder="Password" id="password" type="password" class="form-control">
                   <ng-container *ngIf="password?.touched">
                       <span *ngIf="password?.errors?.['required']" class="text-danger">Password is required!</span>
+                      <span *ngIf="password?.errors?.['maxlength']" class="text-danger">Maximum 32 characters!</span>
+                      <span *ngIf="password?.errors?.['minlength']" class="text-danger">Minimum 6 characters!</span>
                   </ng-container>
               </div>
 

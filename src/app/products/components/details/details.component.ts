@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { AccountFacadeService } from 'src/app/account/services/account-facade.service';
 import { Product } from '../../models/product';
 import { Review } from '../../models/review';
 import { ProductsFacadeService } from '../../services/products-facade.service';
@@ -21,9 +22,11 @@ export class DetailsComponent {
 
   constructor(public productFacade: ProductsFacadeService,
               private route: ActivatedRoute,
-              private router: Router) { 
+              private router: Router,
+              private accountFacade: AccountFacadeService) { 
                 this.reviewForm = new FormGroup({
-                  text: new FormControl(null, [Validators.required]),
+                  text: new FormControl(null, [Validators.required,
+                    Validators.minLength(3)]),
                   rate: new FormControl(null, [Validators.required]),
                 });
               }
@@ -37,16 +40,24 @@ export class DetailsComponent {
   }
 
   onSubmit() {
-    this.productFacade.createReviewIntoProduct(this.product.id, this.reviewForm.value).subscribe(
-      authResponse => {
-        if(authResponse.review_id)
-          this.productFacade.getReviewsByProductId(this.product.id).subscribe(data=>this.reviews = data);
-      },
-      error => {
-        console.error(error);
-        this.router.navigate(['/error']);
-      }
-    );
+    if(this.reviewForm.valid) {
+      this.productFacade.createReviewIntoProduct(this.product.id, this.reviewForm.value).subscribe(
+        authResponse => {
+          if(authResponse.review_id)
+            this.productFacade.getReviewsByProductId(this.product.id).subscribe(data=>this.reviews = data);
+        },
+        error => {
+          console.error(error);
+          this.router.navigate(['/error']);
+        }
+      );
+    }
   }
-
+  onBackClick() {
+    this.accountFacade.logout();
+    this.router.navigate(['/account/login']);
+  } 
+  onListClick() {
+    this.router.navigate(['/products/list']);
+  }
 }

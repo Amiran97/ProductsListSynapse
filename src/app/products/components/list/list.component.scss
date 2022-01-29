@@ -27,8 +27,6 @@ header a {
 main {
   display: flex;
   flex-wrap: nowrap;
-  height: calc(100vh - 50px);
-  max-height: calc(100vh - 50px);
   overflow-x: auto;
   overflow-y: hidden;
   
@@ -46,6 +44,7 @@ main {
     border-radius: 5px;
     border-left: solid 3px #0c687a;
     background-color: #f6f9fd;
+    cursor: pointer;
 }
 
 .sidebar-li-icon {
@@ -61,7 +60,8 @@ main {
 }
 
 .inner-content {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 150px);
+    min-width: 320px;
     background-color: white;
 }
 
@@ -113,13 +113,13 @@ td:last-child{
 }
 
 .main-content{
-    width: calc(100vw - 315px);
+    width: calc(100vw - 245px);
     background-color: transparent;
 }
 
 .footer-content{
-    width: calc(100vw - 315px);
-    height: 95px;
+    width: calc(100vw - 245px);
+    height: 85x;
     background-color: transparent;
 }
 

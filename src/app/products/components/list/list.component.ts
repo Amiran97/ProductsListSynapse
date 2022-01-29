@@ -19,4 +19,8 @@ export class ListComponent {
     this.accountFacade.logout();
     this.router.navigate(['/account/login']);
   } 
+
+  onListClick() {
+    this.router.navigate(['/products/list']);
+  }
 }

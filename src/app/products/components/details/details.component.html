@@ -1,23 +1,82 @@
-<div *ngIf="product else loading">
-  <img class="mb-1" [src]="'http://smktesting.herokuapp.com/static/'+product.img"/>
-  <h5 class="mb-1">{{product.title}}</h5>
-  <p class="mb-1">{{product.text}}</p>
-
-  <div class="my-4">
-    <div *ngFor="let review of reviews" class="list-group-item list-group-item-action">
-        <p>{{review.text}}</p>
-    </div>
+<header class="bd-header py-3 d-flex align-items-stretch border-bottom bg-synapse">
+  <div class="container-fluid d-flex align-items-center">
+    <h1 class="d-flex align-items-center justify-content-center text-align-center text-white">
+      <img src="assets/images/synapse-team-small-logo.png" width="26" height="26" class="me-3 mt-1">
+      Synapse Internship
+    </h1>
+    <a (click)="onBackClick()" class="ms-auto link-light mb-1" style="cursor:pointer;">&#9032;</a>
   </div>
-
-  <div>
-    <form [formGroup]="reviewForm" (submit)="onSubmit()">
-      <textarea formControlName="text" name="text" id="text" placeholder="Type your review..."></textarea>
-      <input formControlName="rate" type="number" placeholder="Choise rate" id="rate" name="rate"/>
-      <button [disabled]="reviewForm.invalid" type="submit" class="btn btn-primary mr-2 mt-4">Submit Review</button>
-    </form>
+</header>
+<main>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-dark card" style="width: 210px;">
+    <p class="d-flex align-items-center justify-content-center sidebar-logo mx-auto">
+      ST
+    </p>
+    <p class="fs-6 d-flex align-items-center justify-content-center mb-3 mx-auto">
+      Synapse Team
+    </p>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <p (click)="onListClick()" href="#" class="active sidebar-li p-1" aria-current="page">
+          <img src="assets/images/basket_icon.svg" class="sidebar-li-icon mb-1">
+          Products
+        </p>
+      </li>
+    </ul>
+  </div>
+<div class="bd-cheatsheet d-flex flex-column flex-shrink-0 mt-3 ms-3 mb-0 main-content">
+    <div class="inner-content">
+      <div *ngIf="product else loading" class="row">
+        <div class="col-3">
+          <div class="card p-3">
+            <img class="mb-3" [src]="'http://smktesting.herokuapp.com/static/'+product.img"/>
+            <h5 class="mb-2">{{product.title | titlecase}}</h5>
+            <p class="mb-3 text-lightgrey">{{product.text | titlecase}}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="my-card mb-3">
+            <p class="p-3 m-0">Your review</p>
+            <hr class="m-0"/>
+            <form [formGroup]="reviewForm" (submit)="onSubmit()" class="p-3">
+              <div class="mb-3">
+                <textarea class="form-control" rows="4" formControlName="text" name="text" id="text" placeholder="Type your review..."></textarea>
+                <ng-container *ngIf="text?.touched">
+                  <span *ngIf="text?.errors?.['required']" class="text-danger">Review text is required!</span>
+                  <span *ngIf="text?.errors?.['minlength']" class="text-danger">Minimum 3 characters!</span>
+                </ng-container>
+              </div>
+              <div class="mb-3">
+                <bar-rating id="rate" name="rata" formControlName="rate" [max]="5"></bar-rating>
+                <ng-container *ngIf="rate?.touched">
+                  <span *ngIf="rate?.errors?.['required']" class="text-danger">Rate is required!</span>
+                </ng-container>
+              </div>
+              <button [disabled]="reviewForm.invalid" type="submit" class="justify-content-start btn btn-primary mr-2">SUBMIT REVIEW</button>
+            </form>
+          </div>
+          <div class="review-content">
+            <div *ngFor="let review of reviews" class="my-card p-3 mb-3">
+                <p class="mb-1"><span class="text-ligthbold">{{review.created_by.username | titlecase}}</span> {{'at ' + (review.created_at | date:'hh:mm, dd MMMM yyyy')}}</p>
+                <bar-rating [rate]="review.rate" [readOnly]="true" [max]="5"></bar-rating>
+                <p class="mb-0"><i>{{review.text}}</i></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div> 
+  <div class="footer-content">
+    <hr/>
+    <p class="mb-1">@Synapse Internship, 2021</p>
+    <p class="mt-0 mb-1 text-lightgrey">This is a version for test angular developers</p>
   </div>
 </div>
+</main>
+
 
 <ng-template #loading>
-  <img src="assets/images/loading-spinner.svg">
+    <img src="assets/images/loading-spinner.svg">
 </ng-template>
+
+

@@ -19,8 +19,12 @@ export class LoginComponent implements OnInit {
     private accountFacade: AccountFacadeService,
     private router: Router) {
       this.loginForm = new FormGroup({
-        username: new FormControl(null, [Validators.required]),
-        password: new FormControl(null, [Validators.required]),
+        username: new FormControl(null, [Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(4)]), 
+        password: new FormControl(null, [Validators.required,
+          Validators.maxLength(32),
+          Validators.minLength(6)])
       });
      }
 

@@ -21,9 +21,15 @@ export class RegisterComponent implements OnInit {
     private accountFacade: AccountFacadeService,
     private router: Router) {
       this.registerForm = new FormGroup({
-        username: new FormControl(null, [Validators.required]),
-        password: new FormControl(null, [Validators.required]),
-        confirmPassword: new FormControl(null, [Validators.required])
+        username: new FormControl(null, [Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(20)]),
+        password: new FormControl(null, [Validators.required,
+          Validators.maxLength(32),
+          Validators.minLength(6)]),
+        confirmPassword: new FormControl(null, [Validators.required,
+          Validators.maxLength(32),
+          Validators.minLength(6)])
       }, {validators: [ConfirmValidator.sameValues('password', 'confirmPassword')], updateOn: 'change'});
      }
 

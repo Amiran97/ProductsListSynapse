@@ -4,11 +4,11 @@
       <img src="assets/images/synapse-team-small-logo.png" width="26" height="26" class="me-3 mt-1">
       Synapse Internship
     </h1>
-    <a (click)="onBackClick()" class="ms-auto link-light mb-1" style="cursor:pointer;">&#9094;</a>
+    <a (click)="onBackClick()" class="ms-auto link-light mb-1" style="cursor:pointer;">&#9032;</a>
   </div>
 </header>
 <main>
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-dark card" style="width: 280px;">
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-dark card" style="width: 210px;">
     <p class="d-flex align-items-center justify-content-center sidebar-logo mx-auto">
       ST
     </p>
@@ -18,14 +18,14 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <p href="#" class="active sidebar-li p-1" aria-current="page">
+        <p (click)="onListClick()" class="active sidebar-li p-1" aria-current="page">
           <img src="assets/images/basket_icon.svg" class="sidebar-li-icon mb-1">
-          Home
+          Products
         </p>
       </li>
     </ul>
   </div>
-<div class="bd-cheatsheet d-flex flex-column flex-shrink-0 m-3 main-content">
+<div class="bd-cheatsheet d-flex flex-column flex-shrink-0 mt-3 ms-3 mb-0 main-content">
     <div *ngIf="productFacade.products$ | async else loading" class="inner-content">
       <table class="table table-borderless">
         <thead>
