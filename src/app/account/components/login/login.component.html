@@ -8,7 +8,7 @@
             <a class="text-lightgrey" [routerLink]="['/account/register']">Don't have an account? Sign Up</a>
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-              <p>Sign in to Synapse Intership</p>
+              <p>Sign in to Synapse Internship</p>
               <p class="text-lightgrey">Sign in on out platform</p>
 
               <div class="form-group mt-4">
@@ -24,6 +24,10 @@
                       <span *ngIf="password?.errors?.['required']" class="text-danger">Password is required!</span>
                   </ng-container>
               </div>
+
+              <ng-container *ngIf="loginForm?.errors?.['invalid']">
+                <span class="text-danger">{{loginForm?.errors?.['invalid']}}</span>
+              </ng-container>
 
               <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary mr-2 mt-4">SIGN IN</button>
             </form>

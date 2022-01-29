@@ -30,7 +30,10 @@ export class AccountFacadeService {
   }
 
   register(user: User) : Observable<AuthResponse> {
-    return this.accountApi.register(user);
+    return this.accountApi.register(user).pipe(
+      tap(response => this.tokenStorage.setTokens(response.token)),
+      tap(response => this.accountState.setAccount(user))
+    );
   }
 
   login(user: User) : Observable<AuthResponse> {

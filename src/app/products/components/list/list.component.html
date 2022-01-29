@@ -1,3 +1,60 @@
-<p>
-  list works!
-</p>
+<header class="bd-header py-3 d-flex align-items-stretch border-bottom bg-synapse">
+  <div class="container-fluid d-flex align-items-center">
+    <h1 class="d-flex align-items-center justify-content-center text-align-center text-white">
+      <img src="assets/images/synapse-team-small-logo.png" width="26" height="26" class="me-3 mt-1">
+      Synapse Internship
+    </h1>
+    <a (click)="onBackClick()" class="ms-auto link-light mb-1" style="cursor:pointer;">&#9094;</a>
+  </div>
+</header>
+<main>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-dark card" style="width: 280px;">
+    <p class="d-flex align-items-center justify-content-center sidebar-logo mx-auto">
+      ST
+    </p>
+    <p class="fs-6 d-flex align-items-center justify-content-center mb-3 mx-auto">
+      Synapse Team
+    </p>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <p href="#" class="active sidebar-li p-1" aria-current="page">
+          <img src="assets/images/basket_icon.svg" class="sidebar-li-icon mb-1">
+          Home
+        </p>
+      </li>
+    </ul>
+  </div>
+<div class="bd-cheatsheet d-flex flex-column flex-shrink-0 m-3 main-content">
+    <div *ngIf="productFacade.products$ | async else loading" class="inner-content">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productFacade.products$ | async">
+            <td>{{product.title | titlecase}}</td>
+            <td>{{product.text | titlecase}}</td>
+            <td>
+              <a [routerLink]="['/products/details', product.id]" class="d-flex bg-synapse">OPEN</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div> 
+  <div class="footer-content">
+    <hr/>
+    <p class="mb-1">@Synapse Internship, 2021</p>
+    <p class="mt-0 mb-1 text-lightgrey">This is a version for test angular developers</p>
+  </div>
+</div>
+</main>
+
+
+<ng-template #loading>
+    <img src="assets/images/loading-spinner.svg">
+</ng-template>

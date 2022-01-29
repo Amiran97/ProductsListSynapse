@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,10 +14,10 @@ export class AccountApiService {
   constructor(private httpClient: HttpClient) { }
 
   register(user: User) : Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(`${this.apiUrl}/register`, user);
+    return this.httpClient.post<AuthResponse>(`${this.apiUrl}/register/`, user);
   }
 
   login(user: User) : Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(`${this.apiUrl}/login`, user);
+    return this.httpClient.post<AuthResponse>(`${this.apiUrl}/login/`, user);
   }
 }

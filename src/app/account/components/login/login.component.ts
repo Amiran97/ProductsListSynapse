@@ -24,17 +24,20 @@ export class LoginComponent implements OnInit {
       });
      }
 
-  ngOnInit() {
-    
+  async ngOnInit() {
   }
 
   onSubmit() {
     this.accountFacade.login(this.loginForm.value).subscribe(
-      user => {
-        this.router.navigate(['/products/list']);
+      authResponse => {
+        if(authResponse.success)
+          this.router.navigate(['/products/list']);
+        else
+          this.loginForm.setErrors({invalid: authResponse.message});
       },
       error => {
         console.error(error);
+        this.router.navigate(['/error']);
       }
     );
   }

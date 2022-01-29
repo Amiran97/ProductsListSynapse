@@ -1,1 +1,68 @@
-<p>register works!</p>
+<div class="container center-div">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <div class="card-body">
+  
+            <div class="form-center">
+              <div class="row">
+                <div class="col-4">
+                  <a class="text-lightgrey" [routerLink]="['/account/login']">&larr; Go back</a>
+                </div>
+                <div class="col-8">
+                  <a class="text-lightgrey col-4 text-to-end" [routerLink]="['/account/login']">Have an account? Sign in</a>
+              </div>
+            </div>
+              
+  
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <p>Sign up to Synapse Internship</p>
+                <p class="text-lightgrey">Sign up on out platform</p>
+  
+                <div class="form-group mt-4">
+                    <input formControlName="username" placeholder="Username" id="username" type="text" class="form-control">
+                    <ng-container *ngIf="username?.touched">
+                        <span *ngIf="username?.errors?.['required']" class="text-danger">Username is required!</span>
+                    </ng-container>
+                </div>
+  
+                <div class="form-group mt-4">
+                    <input formControlName="password" placeholder="Password" id="password" type="password" class="form-control">
+                    <ng-container *ngIf="password?.touched">
+                      <span *ngIf="password?.errors?.['required']" class="text-danger">Password is required!</span>
+                    </ng-container>
+                </div>
+
+                <div class="form-group mt-4">
+                  <input formControlName="confirmPassword" placeholder="Confirm password" id="confirmPassword" type="password" class="form-control">
+                  <ng-container *ngIf="confirmPassword?.touched">
+                    <span *ngIf="confirmPassword?.errors?.['required']" class="text-danger">Confirm password is required!</span>
+                  </ng-container>
+                </div>
+                
+                <ng-container *ngIf="confirmPassword?.touched && password?.touched">
+                  <span *ngIf="registerForm?.errors?.['sameValue']" class="text-danger">Passwords not match!</span>
+                </ng-container>
+                <ng-container *ngIf="registerForm?.errors?.['invalid']">
+                  <span class="text-danger">{{registerForm?.errors?.['invalid']}}</span>
+                </ng-container>
+
+                <div class="form-check mt-4">
+                  <input class="form-check-input" type="checkbox" id="readConditions">
+                  <label class="form-check-label text-lightgrey" for="readConditions">I have read the <u>Teams and Conditions</u></label>
+                </div>
+
+                <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary mr-2 mt-4">SIGN UP NOW</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <img src="assets/images/synapse-team-big-logo.png" class="img-fluid rounded-start">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

@@ -1,3 +1,23 @@
-<p>
-  details works!
-</p>
+<div *ngIf="product else loading">
+  <img class="mb-1" [src]="'http://smktesting.herokuapp.com/static/'+product.img"/>
+  <h5 class="mb-1">{{product.title}}</h5>
+  <p class="mb-1">{{product.text}}</p>
+
+  <div class="my-4">
+    <div *ngFor="let review of reviews" class="list-group-item list-group-item-action">
+        <p>{{review.text}}</p>
+    </div>
+  </div>
+
+  <div>
+    <form [formGroup]="reviewForm" (submit)="onSubmit()">
+      <textarea formControlName="text" name="text" id="text" placeholder="Type your review..."></textarea>
+      <input formControlName="rate" type="number" placeholder="Choise rate" id="rate" name="rate"/>
+      <button [disabled]="reviewForm.invalid" type="submit" class="btn btn-primary mr-2 mt-4">Submit Review</button>
+    </form>
+  </div>
+</div>
+
+<ng-template #loading>
+  <img src="assets/images/loading-spinner.svg">
+</ng-template>

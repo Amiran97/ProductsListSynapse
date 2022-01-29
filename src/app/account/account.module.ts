@@ -15,9 +15,8 @@ import { AccountRoutingModule } from './account-routing.module';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     ReactiveFormsModule,
     AccountRoutingModule
-  ]
+  ],
 })
 export class AccountModule { }
